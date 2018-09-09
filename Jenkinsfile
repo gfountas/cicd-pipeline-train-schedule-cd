@@ -9,9 +9,9 @@ pipeline {
             }
         }
         stage('Deploy to Staging'){
-            when {
-                branch 'master'
-            }
+            //when {
+            //    branch 'master'
+            //}
             steps{
                 withCredentials([usernamePassword('credentialsId':node_server,usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
                     sshPublisher(
