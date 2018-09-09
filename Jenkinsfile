@@ -15,21 +15,23 @@ pipeline {
             steps{
                 withCredentials([usernamePassword('credentialsId':'nodeservercredentials',usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
                     sshPublisher(
-                        failOnError:true,
+                        failOnError: true,
                         continueOnError: false,
                         publishers: [
-                            configName: 'Staging',
-                            sshCredentials: [
-                                username: "$USERNAME",
-                                encryptedPassPhrase: "$PASSWORD"
-                            ],
-                            transfers: [
-                                sshTransfer(
-                                    sourceFiles: 'dist/trainSchedule.zip',
-                                    removePrefix: 'dist/',
-                                    remoteDirectory: '/tmp',
-                                )                                
-                            ]
+                            sshPublisherDesc(
+                                configName: 'Staging',
+                                sshCredentials: [
+                                    username: "$USERNAME",
+                                    encryptedPassPhrase: "$PASSWORD"
+                                ],
+                                transfers: [
+                                    sshTransfer(
+                                        sourceFiles: 'dist/trainSchedule.zip',
+                                        removePrefix: 'dist/',
+                                        remoteDirectory: '/tmp',
+                                    )                                
+                                ]
+                            )
                         ]
                     )
                 }
