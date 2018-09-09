@@ -13,7 +13,7 @@ pipeline {
             //    branch 'master'
             //}
             steps{
-                withCredentials([usernamePassword('credentialsId':node_server,usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
+                withCredentials([usernamePassword('credentialsId':nodeservercredentials,usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
                     sshPublisher(
                         failOnError:true,
                         continueOnError: false,
